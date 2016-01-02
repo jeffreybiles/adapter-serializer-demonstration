@@ -14,21 +14,19 @@ export default Ember.Controller.extend({
     try {
       var modelName = this.get('modelName')
       // TODO: Turn these into a promise hash after the update, instead of just chained
-      var prom = this.store.createRecord(modelName, {}).save()
+      let prom = this.store.createRecord(modelName, {}).save()
       prom.then((taco)=>{
         taco.set('cost', 3)
         return taco.save()
       }).then((taco)=>{
         taco.deleteRecord()
-        taco.save()
+        return taco.save()
       }).then(()=>{
-        return this.store.findRecord(modelName, 1)
-      }).then(()=>{
-        return this.store.findAll(modelName)
-      }).then(()=>{
-        return this.store.query(modelName, {'tasty': true})
-      }).then(()=>{
-        return this.store.queryRecord(modelName, {'tasty': true})
+        var findRecord = this.store.findRecord(modelName, 1);
+        var findAll = this.store.findAll(modelName);
+        var query = this.store.query(modelName, {'tasty': true});
+        var queryRecord = this.store.queryRecord(modelName, {'tasty': true});
+        return Ember.RSVP.all([findRecord, findAll, query, queryRecord]);
       }).then(()=>{
         this.set('urls', this.get('urlTracker.urls'))
         this.propertyDidChange('urls')
