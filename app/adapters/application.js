@@ -3,13 +3,19 @@ import DS from 'ember-data';
 export default DS.RESTAdapter.extend({
   urlTracker: Ember.inject.service(),
   ajax(url, type, options) {
-    console.log('in ajax', url, type, options);
     let requestType = this.get("urlTracker").ajaxCalled(url, type)
-    return Ember.RSVP.resolve()
+    var returnValue;
+    if(requestType == 'createRecord'){
+      returnValue = {}
+    } else if(requestType == 'findRecord'){
+      returnValue = {'taco': {'id': 1, 'tasty': true}}
+    } else if(requestType == 'findAll'){
+      returnValue = {'tacos': []}
+    }
+    return Ember.RSVP.resolve(this.handleResponse(200, {}, returnValue))
     // return this._super(...arguments)
   },
   buildURL(modelName, id, snapshot, requestType, query){
-    console.log('request type', requestType)
     this.get("urlTracker").prepareFor(requestType)
     return this._super(...arguments)
   }

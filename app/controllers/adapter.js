@@ -5,15 +5,27 @@ export default Ember.Controller.extend({
   urls: {},
   actions: {
     outputUrls(){
-      var prom = this.store.createRecord('taco', {}).save()
-      prom.then(()=>{
-        this.store.findAll('taco')
-      }).then(()=>{
-        console.log(this.get('urlTracker.urls'))
-        this.set('urls', this.get('urlTracker.urls'))
-      })
-      // this.store.findAll('taco')
-      // this.store.findRecord('taco', 1)
+      this.findUrls()
     }
+  },
+  findUrls(){
+    var prom = this.store.createRecord('taco', {}).save()
+    prom.then((taco)=>{
+      taco.set('cost', 3)
+      return taco.save()
+    }).then((taco)=>{
+      taco.deleteRecord()
+      taco.save()
+    }).then(()=>{
+      return this.store.findAll('taco')
+    }).then(()=>{
+      return this.store.findRecord('taco', 1)
+    }).then(()=>{
+      this.set('urls', this.get('urlTracker.urls'))
+    })
+  },
+  init(){
+    this.findUrls()
+    this._super(...arguments)
   }
 });

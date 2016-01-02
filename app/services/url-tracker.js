@@ -8,6 +8,6 @@ export default Ember.Service.extend({
   },
   ajaxCalled(url, requestType){
     this.set(`urls.${this.get('readyForRequestType')}`, {url: url, requestType: requestType})
-    return requestType
+    return this.get('readyForRequestType')
   }
 });
