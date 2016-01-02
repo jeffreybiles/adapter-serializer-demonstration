@@ -1,9 +1,14 @@
+<h4>Choose a Model</h4>
+
+<p>Available Models</p>
+<ul>
+{{#each model as |dataModel|}}
+  <li {{action 'outputUrlsFor' dataModel.name}}>{{dataModel.name}}</li>
+{{/each}}
+</ul>
+
 <h4>URLs used by {{modelName}} Adapter</h4>
 
-{{input value=modelName}}
-<button {{action 'outputUrls'}}>Output Urls</button>
-<br>
-<div style='color: red;'>{{errorMessage}}</div>
 <ul>
 {{#each-in urls as |key value|}}
   <li>{{key}}, {{value.requestType}} {{value.url}}, {
