@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
     }
   },
   findUrls(){
-    var prom = this.store.createRecord('taco', {}).save()
+    var prom = this.store.createRecord('taco-taco', {}).save()
     prom.then((taco)=>{
       taco.set('cost', 3)
       return taco.save()
@@ -17,9 +17,9 @@ export default Ember.Controller.extend({
       taco.deleteRecord()
       taco.save()
     }).then(()=>{
-      return this.store.findAll('taco')
+      return this.store.findAll('taco-taco')
     }).then(()=>{
-      return this.store.findRecord('taco', 1)
+      return this.store.findRecord('taco-taco', 1)
     }).then(()=>{
       this.set('urls', this.get('urlTracker.urls'))
     })

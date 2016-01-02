@@ -8,9 +8,9 @@ export default DS.RESTAdapter.extend({
     if(requestType == 'createRecord'){
       returnValue = {}
     } else if(requestType == 'findRecord'){
-      returnValue = {'taco': {'id': 1, 'tasty': true}}
+      returnValue = {'taco_taco': {'id': 1, 'tasty': true}}
     } else if(requestType == 'findAll'){
-      returnValue = {'tacos': []}
+      returnValue = {'taco_tacos': []}
     }
     return Ember.RSVP.resolve(this.handleResponse(200, {}, returnValue))
     // return this._super(...arguments)
