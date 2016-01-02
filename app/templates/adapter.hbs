@@ -1,4 +1,9 @@
-<h4>URLs used by taco-taco Adapter</h4>
+<h4>URLs used by {{modelName}} Adapter</h4>
+
+{{input value=modelName}}
+<button {{action 'outputUrls'}}>Output Urls</button>
+<br>
+<div style='color: red;'>{{errorMessage}}</div>
 <ul>
 {{#each-in urls as |key value|}}
   <li>{{key}}, {{value.requestType}} {{value.url}}, {
