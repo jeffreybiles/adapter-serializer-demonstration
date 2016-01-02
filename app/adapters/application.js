@@ -18,5 +18,7 @@ export default DS.RESTAdapter.extend({
   buildURL(modelName, id, snapshot, requestType, query){
     this.get("urlTracker").prepareFor(requestType)
     return this._super(...arguments)
-  }
+  },
+  namespace: 'api/v1',
+  host: 'tacodeli.com'
 });
