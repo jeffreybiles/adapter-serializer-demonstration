@@ -21,6 +21,10 @@ export default Ember.Controller.extend({
     }).then(()=>{
       return this.store.findRecord('taco-taco', 1)
     }).then(()=>{
+      return this.store.query('taco-taco', {'tasty': true})
+    }).then(()=>{
+      return this.store.queryRecord('taco-taco', {'tasty': true})
+    }).then(()=>{
       this.set('urls', this.get('urlTracker.urls'))
     })
   },

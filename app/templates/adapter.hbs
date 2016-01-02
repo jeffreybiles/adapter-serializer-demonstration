@@ -1,6 +1,11 @@
 <h4>URLs used by taco-taco Adapter</h4>
 <ul>
 {{#each-in urls as |key value|}}
-  <li>{{key}}, {{value.requestType}} {{value.url}}</li>
+  <li>{{key}}, {{value.requestType}} {{value.url}}, {
+    {{#each-in value.queries as |qkey qvalue|}}
+      {{qkey}}: {{qvalue}}
+    {{/each-in}}
+  }
+  </li>
 {{/each-in}}
 </ul>
