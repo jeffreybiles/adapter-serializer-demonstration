@@ -17,6 +17,9 @@ export default Ember.Mixin.create({
     return Ember.RSVP.resolve(this.handleResponse(200, {}, returnValue))
   },
   buildURL(modelName, id, snapshot, requestType, query){
+    if (this.sortQueryParams && query) {
+      query = this.sortQueryParams(query);
+    }
     this.get("urlTracker").prepareFor(requestType, query, modelName)
     return this._super(...arguments)
   }

@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
       }).then(()=>{
         var findRecord = this.store.findRecord(modelName, 1);
         var findAll = this.store.findAll(modelName);
-        var query = this.store.query(modelName, {'tasty': true});
+        var query = this.store.query(modelName, {'tasty': true, 'aa': 'hello', 'bb': 'goodbye'});
         var queryRecord = this.store.queryRecord(modelName, {'tasty': true});
         return Ember.RSVP.all([findRecord, findAll, query, queryRecord]);
       }).then(()=>{
